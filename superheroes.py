@@ -149,9 +149,9 @@ class Team:
         for hero in self.heroes:
             # hero.defend() colloects all the heros defense
             tot_defence += hero.defend()
-            if damage_amt > tot_defence:
-                excess_damage = damage_amt - tot_defence
-                num_kills = self.deal_damage(excess_damage)
+        if damage_amt > tot_defence:
+            excess_damage = damage_amt - tot_defence
+            num_kills = self.deal_damage(excess_damage)
         return num_kills
 
     def deal_damage(self, damage):
@@ -173,7 +173,7 @@ class Team:
     def revive_heroes(self, health=100):
         for hero in self.heroes:
             # might be hero.health ,   not hero.self.health
-            hero.self.health = health
+            hero.health = hero.start_health
 
     def stats(self):
         print("Ratio of kills to deaths is {}:{}".format(self.kills, self.deaths))
