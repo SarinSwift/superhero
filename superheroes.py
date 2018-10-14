@@ -139,7 +139,7 @@ class Team:
         tot_attack_strength = 0
         for hero in self.heroes:
             tot_attack_strength += hero.attack()
-            killed_heroes = other_team.defend(tot_attack_strength)
+        killed_heroes = other_team.defend(tot_attack_strength)
 
         for hero in self.heroes:
             hero.add_kill(killed_heroes)
@@ -155,9 +155,11 @@ class Team:
         for hero in self.heroes:
             # hero.defend() colloects all the heros defense
             tot_defence += hero.defend()
-        return self.deal_damage(damage_amt - tot_defence)
-        # if damage_amt > tot_defence:
-        #     excess_damage = damage_amt - tot_defence
+        excess_damage = damage_amt - tot_defence
+        if excess_damage > 0:
+            return self.deal_damage(excess_damage)
+        else:
+            return 0
 
 
     def deal_damage(self, damage):
@@ -304,6 +306,7 @@ class Arena:
         print("\n")
         print("Team 1 stats:")
         self.team_one.stats()
+
         print("\n")
         print("Team 2 stats:")
         self.team_two.stats()
